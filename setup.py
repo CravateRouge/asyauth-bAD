@@ -13,7 +13,7 @@ else:
 
 setup(
 	# Application name:
-	name="asyauth",
+	name="asyauth-bAD",
 
 	# Version number (initial):
 	version=verstr,
