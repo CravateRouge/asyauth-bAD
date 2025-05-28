@@ -21,6 +21,10 @@ setup(
 	# Application author details:
 	author="Tamas Jos",
 	author_email="info@skelsecprojects.com",
+    
+	# Maintainer details:
+	maintainer="Baptiste Crépin",
+	maintainer_email="baptiste@cravaterouge.com",
 
 	# Packages
 	packages=find_packages(exclude=["tests*"]),
@@ -29,7 +33,7 @@ setup(
 	include_package_data=True,
 
 	# Details
-	url="https://github.com/skelsec/asyauth",
+	url="https://github.com/CravateRouge/asyauth-bAD",
 
 	zip_safe = False,
 	#

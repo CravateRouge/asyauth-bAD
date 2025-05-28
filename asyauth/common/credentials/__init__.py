@@ -103,7 +103,7 @@ class UniCredential:
 		url_e = urlparse(connection_url)
 		url_dict = url_e._asdict()
 		for prop, val in url_dict.items():
-			if type(val) is str:
+			if type(val) is str and prop != 'query':
 				url_dict[prop] = unquote(val)
 		url_e = url_e._replace(**url_dict)
 		schemes = url_e.scheme.upper().split('+')
