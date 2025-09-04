@@ -12,8 +12,8 @@ import os
 # GUID is the data type for a 16-octet number encoded in little endian.
 
 
-from minikerberos.protocol.asn1_structs import AS_REQ, AS_REP, AP_REQ, AP_REP
-from minikerberos.protocol.rfc4556 import MetaData
+from kerbad.protocol.asn1_structs import AS_REQ, AS_REP, AP_REQ, AP_REP
+from kerbad.protocol.rfc4556 import MetaData
 
 NEGOEXTS_DEFAULT_AUTHID = uuid.UUID(bytes_le=bytes.fromhex('5c33530deaf90d4db2ec4ae3786ec308'))
 

@@ -7,14 +7,14 @@ from asyauth.common.credentials.kerberos import KerberosCredential
 from asyauth.protocols.kerberos.gssapi import get_gssapi, KRB5_MECH_INDEP_TOKEN
 from asyauth.protocols.kerberos.gssapismb import get_gssapi as gssapi_smb
 
-from minikerberos.common.spn import KerberosSPN
-from minikerberos.gssapi.gssapi import GSSAPIFlags
-from minikerberos.protocol.asn1_structs import AP_REP, EncAPRepPart, Ticket, EncryptedData
-from minikerberos.protocol.constants import MESSAGE_TYPE
-from minikerberos.protocol.ticketutils import construct_apreq_from_ticket
-from minikerberos.protocol.encryption import Key, _enctype_table
-from minikerberos.aioclient import AIOKerberosClient
-from minikerberos.protocol.errors import KerberosError, KerberosErrorCode
+from kerbad.common.spn import KerberosSPN
+from kerbad.gssapi.gssapi import GSSAPIFlags
+from kerbad.protocol.asn1_structs import AP_REP, EncAPRepPart, Ticket, EncryptedData
+from kerbad.protocol.constants import MESSAGE_TYPE
+from kerbad.protocol.ticketutils import construct_apreq_from_ticket
+from kerbad.protocol.encryption import Key, _enctype_table
+from kerbad.aioclient import AIOKerberosClient
+from kerbad.protocol.errors import KerberosError, KerberosErrorCode
 
 
 class KerberosClientNative:
@@ -148,18 +148,18 @@ class KerberosClientNative:
 				except:
 					# fetching TGT
 					try:
-						tgt = await self.kc.get_TGT(override_etype = self.credential.etypes)
+						tgt = await self.kc.with_clock_skew(self.kc.get_TGT, override_etype = self.credential.etypes)
 					except KerberosError as e:
 						if e.errorcode == KerberosErrorCode.KDC_ERR_WRONG_REALM:
 							# if the target user is in a different domain, we need to get a referral ticket
-							# however at this point it's a guess work, as this heavely relies on the target domain's trust settings
+							# however at this point it's a guess work, as this heavily relies on the target domain's trust settings
 							# and the correct DNS settings
 
 							newtarget = self.kc.target.get_kerberos_target(dc_ip=self.kc.credential.domain, domain=self.kc.credential.domain)
 							newkc = AIOKerberosClient(self.ccred, newtarget)
-							ref_tgs, ref_encpart, ref_key, new_factory = await newkc.get_referral_ticket(spn.domain, self.credential.target.get_ip_or_hostname())
+							ref_tgs, ref_encpart, ref_key, new_factory = await newkc.with_clock_skew(newkc.get_referral_ticket, spn.domain, self.credential.target.get_ip_or_hostname())
 							self.kc = new_factory.get_client()
-							tgs, encpart, self.session_key = await self.kc.get_TGS(spn)#, override_etype = self.preferred_etypes)						
+							tgs, encpart, self.session_key = await self.kc.with_clock_skew(self.kc.get_TGS, spn)#, override_etype = self.preferred_etypes)						
 						else:
 							logger.debug('Failed to get TGT! %s' % e)
 							raise e
@@ -169,10 +169,10 @@ class KerberosClientNative:
 					# if the target server is in a different domain, we need to get a referral ticket
 					if self.credential.cross_target is not None:
 						# cross-domain kerberos
-						ref_tgs, ref_encpart, ref_key, new_factory = await self.kc.get_referral_ticket(self.credential.cross_realm, self.credential.cross_target.get_ip_or_hostname())
+						ref_tgs, ref_encpart, ref_key, new_factory = await self.kc.with_clock_skew(self.kc.get_referral_ticket, self.credential.cross_realm, self.credential.cross_target.get_ip_or_hostname())
 						self.kc = new_factory.get_client()
 						spn.domain = self.credential.cross_realm
-					tgs, encpart, self.session_key = await self.kc.get_TGS(spn)#, override_etype = self.preferred_etypes)
+					tgs, encpart, self.session_key = await self.kc.with_clock_skew(self.kc.get_TGS, spn)#, override_etype = self.preferred_etypes)
 				
 				logger.debug('TGS: %s' % tgs)
 				logger.debug('encpart: %s' % encpart)
@@ -252,7 +252,7 @@ class KerberosClientNative:
 				enc_part = EncAPRepPart.load(temp).native
 				cipher = _enctype_table[int(enc_part['subkey']['keytype'])]()
 					
-				now = datetime.datetime.now(datetime.timezone.utc)
+				now = self.kc._now()
 				apreppart_data = {}
 				apreppart_data['cusec'] = now.microsecond
 				apreppart_data['ctime'] = now.replace(microsecond=0)

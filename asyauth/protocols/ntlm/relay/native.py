@@ -15,7 +15,7 @@ from asyauth.protocols.ntlm.messages.authenticate import NTLMAuthenticate
 from asyauth.protocols.ntlm.creds_calc import NTLMCredentials
 from asyauth.protocols.ntlm.structures.avpair import MsvAvFlags, AVPAIRType, AVPair
 from asyauth.protocols.ntlm.structures.challenge_response import NTLMv2Response
-from minikerberos.gssapi.channelbindings import ChannelBindingsStruct
+from kerbad.gssapi.channelbindings import ChannelBindingsStruct
 from typing import Callable
 
 async def log_cb_dummy(msg):

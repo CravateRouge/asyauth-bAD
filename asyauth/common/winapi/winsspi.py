@@ -4,7 +4,7 @@ from asyauth.common.winapi.constants import SECPKG_ATTR, SECPKG_CRED, ISC_REQ, S
 from asyauth.common.winapi.functiondefs import AcquireCredentialsHandle, InitializeSecurityContext,\
 	DecryptMessage, EncryptMessage, SecPkgContext_SessionKey, QueryContextAttributes,\
 	GetSequenceNumberFromEncryptdataKerberos
-from minikerberos.protocol.asn1_structs import AP_REQ
+from kerbad.protocol.asn1_structs import AP_REQ
 from asyauth.common.winapi.token import InitialContextToken
 
 class SSPIPackage(enum.Enum):

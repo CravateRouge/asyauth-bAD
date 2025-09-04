@@ -3,7 +3,7 @@ import datetime
 import ctypes
 
 from asyauth.common.winapi.constants import SECBUFFER_TYPE, SEC_E, ISC_REQ
-from minikerberos.gssapi.gssapi import GSSWrapToken
+from kerbad.gssapi.gssapi import GSSWrapToken
 
 windll      = ctypes.windll
 byref       = ctypes.byref

@@ -17,7 +17,7 @@ from asyauth.protocols.ntlm.messages.negotiate import NTLMNegotiate
 from asyauth.protocols.ntlm.messages.challenge import NTLMChallenge
 from asyauth.protocols.ntlm.messages.authenticate import NTLMAuthenticate
 from asyauth.protocols.ntlm.creds_calc import netntlmv2, AVPAIRType, LMResponse, netntlm, netntlm_ess
-from minikerberos.gssapi.channelbindings import ChannelBindingsStruct
+from kerbad.gssapi.channelbindings import ChannelBindingsStruct
 		
 
 class NTLMClientNative:

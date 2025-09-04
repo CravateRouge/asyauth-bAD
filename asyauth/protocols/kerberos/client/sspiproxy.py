@@ -2,9 +2,9 @@ import io
 import enum
 
 from asyauth.protocols.spnego.messages.asn1_structs import KRB5Token
-from minikerberos.gssapi.gssapi import get_gssapi, GSSWrapToken
-from minikerberos.protocol.asn1_structs import AP_REQ, AP_REP, TGS_REP
-from minikerberos.protocol.encryption import Enctype, Key, _enctype_table
+from kerbad.gssapi.gssapi import get_gssapi, GSSWrapToken
+from kerbad.protocol.asn1_structs import AP_REQ, AP_REP, TGS_REP
+from kerbad.protocol.encryption import Enctype, Key, _enctype_table
 from wsnet.operator.sspiproxy import WSNETSSPIProxy
 from asn1crypto.core import ObjectIdentifier
 from asyauth.common.winapi.constants import ISC_REQ

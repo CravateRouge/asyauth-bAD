@@ -5,7 +5,7 @@ from asyauth.common.credentials import UniCredential
 from asyauth.common.constants import asyauthSecret
 from asyauth.common.constants import asyauthProtocol
 from asyauth.common.constants import asyauthSubProtocol
-from minikerberos.common.creds import EncryptionType, Enctype
+from kerbad.common.creds import EncryptionType, Enctype
 
 class TestURLNTLM(unittest.TestCase):
     def setUp(self):

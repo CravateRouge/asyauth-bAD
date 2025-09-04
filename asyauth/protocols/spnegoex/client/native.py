@@ -14,7 +14,7 @@ from asyauth.common.constants import asyauthSecret
 from asyauth.common.credentials.kerberos import KerberosCredential
 from asyauth.protocols.spnegoex.protocol.messages import MESSAGE_TYPE, PKU2U_TOKEN_TYPE, generate_verify, generate_initiator_metadata, generate_init_nego, generate_ap_req, negoexts_parse_bytes
 from asyauth.protocols.kerberos.gssapismb import get_gssapi
-from minikerberos.pkinit import PKINIT
+from kerbad.pkinit import PKINIT
 from asysocks.unicomm.common.target import UniTarget
 
 
@@ -77,7 +77,7 @@ class SPNEGOEXClientNative:
 			return msg, True, None
 
 		elif self.iteractions == 1:
-			from minikerberos.protocol.encryption import Enctype, _checksum_table, _enctype_table, Key
+			from kerbad.protocol.encryption import Enctype, _checksum_table, _enctype_table, Key
 			self.iteractions += 1
 			
 			self._msgs += authData
@@ -113,8 +113,8 @@ class SPNEGOEXClientNative:
 
 
 		elif self.iteractions == 2:
-			from minikerberos.protocol.encryption import Enctype, _checksum_table, _enctype_table, Key
-			from minikerberos.protocol.asn1_structs import EncAPRepPart
+			from kerbad.protocol.encryption import Enctype, _checksum_table, _enctype_table, Key
+			from kerbad.protocol.asn1_structs import EncAPRepPart
 
 			#input('aaaaaaaaaaaaaa')
 			self.iteractions += 1

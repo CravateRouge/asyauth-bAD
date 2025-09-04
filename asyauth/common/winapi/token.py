@@ -1,5 +1,5 @@
 from asn1crypto.core import ObjectIdentifier, Any, SequenceOf, Sequence, Boolean
-from minikerberos.protocol.asn1_structs import krb5int32, APOptions, Ticket, EncryptedData
+from kerbad.protocol.asn1_structs import krb5int32, APOptions, Ticket, EncryptedData
 
 UNIVERSAL = 0
 APPLICATION = 1

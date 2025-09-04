@@ -4,8 +4,8 @@ import os
 
 from asn1crypto.core import ObjectIdentifier
 
-from minikerberos.protocol.constants import EncryptionType
-from minikerberos.protocol import encryption
+from kerbad.protocol.constants import EncryptionType
+from kerbad.protocol import encryption
 from unicrypto import hmac
 from unicrypto.hashlib import md5
 from unicrypto.symmetric import RC4

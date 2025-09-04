@@ -5,10 +5,10 @@ from asyauth.protocols.kerberos.gssapismb import get_gssapi as gssapi_smb
 from asyauth.common.winapi.token import InitialContextToken
 from asyauth.common.winapi.constants import ISC_REQ
 
-from minikerberos.protocol.encryption import Key, _enctype_table
-from minikerberos.protocol.asn1_structs import AP_REP, AP_REQ
-from minikerberos.protocol.encryption import Key
-from minikerberos.gssapi.gssapi import GSSWrapToken
+from kerbad.protocol.encryption import Key, _enctype_table
+from kerbad.protocol.asn1_structs import AP_REP, AP_REQ
+from kerbad.protocol.encryption import Key
+from kerbad.gssapi.gssapi import GSSWrapToken
 from wsnet.agent.direct.auth import WSNETDirectAuth
 
 

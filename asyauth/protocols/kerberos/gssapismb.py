@@ -2,8 +2,8 @@ import enum
 import io
 import os
 
-from minikerberos.protocol.constants import EncryptionType
-from minikerberos.protocol import encryption
+from kerbad.protocol.constants import EncryptionType
+from kerbad.protocol import encryption
 from unicrypto.hashlib import md5
 from unicrypto import hmac
 from unicrypto.symmetric import RC4

@@ -1,12 +1,12 @@
 
-from minikerberos.gssapi.gssapi import get_gssapi, GSSWrapToken
-from minikerberos.protocol.asn1_structs import AP_REP
-from minikerberos.protocol.encryption import Key
+from kerbad.gssapi.gssapi import get_gssapi, GSSWrapToken
+from kerbad.protocol.asn1_structs import AP_REP
+from kerbad.protocol.encryption import Key
 from asyauth.common.winapi.constants import ISC_REQ
-from minikerberos.protocol.encryption import Key, _enctype_table
-from minikerberos.protocol.asn1_structs import AP_REP, AP_REQ
-from minikerberos.protocol.encryption import Key
-from minikerberos.gssapi.gssapi import GSSWrapToken
+from kerbad.protocol.encryption import Key, _enctype_table
+from kerbad.protocol.asn1_structs import AP_REP, AP_REQ
+from kerbad.protocol.encryption import Key
+from kerbad.gssapi.gssapi import GSSWrapToken
 from asyauth.protocols.kerberos.gssapismb import get_gssapi as gssapi_smb
 from asyauth.common.winapi.token import InitialContextToken
 

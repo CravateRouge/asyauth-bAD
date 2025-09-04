@@ -4,11 +4,11 @@ from asyauth.common.constants import asyauthSecret, asyauthProtocol, asyauthSubP
 from asyauth.common.subprotocols import SubProtocol
 from asyauth.common.subprotocols import SubProtocolNative
 from asysocks.unicomm.common.target import UniTarget
-from minikerberos.common.creds import KerberosCredential as KCRED
+from kerbad.common.creds import KerberosCredential as KCRED
 from asyauth.utils.paramprocessor import str_one, int_one, bool_one, int_list
 
 # another hidden import because of oscrypto
-#from minikerberos.pkinit import PKINIT
+#from kerbad.pkinit import PKINIT
 
 class KerberosCredential(UniCredential):
 	def __init__(self, secret, username, domain, stype:asyauthSecret, target:UniTarget = None, altname:str = None, altdomain:str = None, etypes:List[int] = None, subprotocol:SubProtocol = SubProtocolNative(), certdata:str = None, keydata:str=None, cross_target:UniTarget = None, cross_realm:str = None):
@@ -48,7 +48,7 @@ class KerberosCredential(UniCredential):
 
 	def get_pkinit(self):
 		# hidden import
-		from minikerberos.pkinit import PKINIT
+		from kerbad.pkinit import PKINIT
 
 		if self.stype == asyauthSecret.CERTSTORE:
 			return PKINIT.from_windows_certstore(self.settings.pfx12_file, certstore_name = 'MY', cert_serial = None, dh_params = self.dh_params, is_azure = self.is_azure)

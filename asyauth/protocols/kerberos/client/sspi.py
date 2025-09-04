@@ -1,5 +1,5 @@
-from minikerberos.protocol.asn1_structs import AP_REQ, AP_REP
-from minikerberos.protocol.encryption import Enctype, Key, _enctype_table
+from kerbad.protocol.asn1_structs import AP_REQ, AP_REP
+from kerbad.protocol.encryption import Enctype, Key, _enctype_table
 from asyauth.common.winapi.winsspi import WinSSPI, SSPIPackage
 from asyauth.common.winapi.constants import ISC_REQ
 from asyauth.protocols.kerberos.gssapi import get_gssapi
